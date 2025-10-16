@@ -1,0 +1,120 @@
+<html>
+
+<head>
+
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Serie de Arrays - Ejercicio 07</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="card">
+    <h2>🏷️ Arrays · Ejercicio 07: Informe total del array</h2>
+
+    <div class="instrucciones">
+      <h3>📋 Instrucciones</h3>
+      <p>Con el array <code>[15, 8, 23, 42, 7, 99, 14, 33, 50, 61]</code>, 
+      en un solo recorrido calcula:</p>
+      <ul>
+        <li>Mayor valor y su posición</li>
+        <li>Menor valor y su posición</li>
+        <li>Suma de pares</li>
+        <li>Suma de impares</li>
+        <li>Suma total</li>
+      </ul>
+    </div>
+
+    <ul id="listaNumeros" class="lista"></ul>
+
+    <div id="resultado" class="resultado">Los resultados aparecerán aquí.</div>
+
+    <button id="btnEjecutar" class="btn" type="button">¡Generar informe!</button>
+
+    <footer>Curso de JavaScript · Enseñanza Media | Ejercicio de Arrays 07</footer>
+  </div>
+
+ 
+  <script>
+    function generarInformeArray() {
+      let numeros = [15, 8, 23, 42, 7, 99, 14, 33, 50, 61];
+      let lista = document.getElementById('listaNumeros');
+      let resultado = document.getElementById('resultado');
+
+      lista.innerHTML = "";
+      resultado.innerText = "";
+
+    
+      for (let i = 0; i < numeros.length; i++) {
+        let item = document.createElement('li');
+        item.innerText = "Índice " + i + ": " + numeros[i];
+        lista.appendChild(item);
+      }
+
+      
+      let mayor = numeros[0];
+      let menor = numeros[0];
+      let posMayor = 0;
+      let posMenor = 0;
+      let sumaPares = 0;
+      let sumaImpares = 0;
+      let sumaTotal = 0;
+
+      console.log("generarInformeArray(): iniciando recorrido...");
+
+     
+      for (let i = 0; i < numeros.length; i++) {
+        let valor = numeros[i];
+        sumaTotal += valor;
+
+        if (valor % 2 === 0) {
+          sumaPares += valor;
+        } else {
+          sumaImpares += valor;
+        }
+
+        if (valor > mayor) {
+          mayor = valor;
+          posMayor = i;
+        }
+
+        if (valor < menor) {
+          menor = valor;
+          posMenor = i;
+        }
+      }
+
+     
+      resultado.innerHTML = `
+        <h3>📊 Resultados del análisis:</h3>
+        <ul class="resumen">
+          <li>🏆 <b>Mayor valor:</b> ${mayor} (posición ${posMayor})</li>
+          <li>🔻 <b>Menor valor:</b> ${menor} (posición ${posMenor})</li>
+          <li>⚖️ <b>Suma de pares:</b> ${sumaPares}</li>
+          <li>⚖️ <b>Suma de impares:</b> ${sumaImpares}</li>
+          <li>➕ <b>Suma total:</b> ${sumaTotal}</li>
+        </ul>
+      `;
+      resultado.classList.add('mensaje-correcto');
+
+      console.log("Informe final:", {
+        mayor: mayor,
+        posMayor: posMayor,
+        menor: menor,
+        posMenor: posMenor,
+        sumaPares: sumaPares,
+        sumaImpares: sumaImpares,
+        sumaTotal: sumaTotal
+      });
+    }
+
+ 
+    let btnEjecutar = document.getElementById('btnEjecutar');
+    btnEjecutar.onclick = generarInformeArray;
+
+
+    console.log('Script cargado: botón #btnEjecutar enlazado a generarInformeArray; listo para ejecutar.');
+  </script>
+</body>
+</html>
+
+
